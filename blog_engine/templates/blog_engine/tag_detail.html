@@ -1,0 +1,26 @@
+{% extends "project_base.html" %}
+
+{% block title %}
+    Tag: {{ tag.title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Tag: {{ tag.title }}</h2>
+    {% if tag.topics.all %}
+        <h5>Related topics:</h5>
+        {% for topic in tag.topics.all %}
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ topic.title }} <span class="text-muted">some sheeeit</span></h5>
+                    <p class="card-text">{{ topic.body|truncatewords:15 }}</p>
+                    <a href="{% url "topic_detail_url" topic.id %}" class="btn btn-primary">See..</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <h5>There is no related topics</h5>
+    {% endif %}
+
+    <a href="{% url "tags_list_url" %}">All tags</a>
+{% endblock %}

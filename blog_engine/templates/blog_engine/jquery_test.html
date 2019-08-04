@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="{% static "jquery/jquery-3.3.1.min.js" %}"></script>
+
+
+    <script type="text/javascript" src="{% static "js/my_jquery.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/black_and_white.css" %}">
+
+    <title>jQuery test</title>
+</head>
+<body>
+
+
+<div class="image_place">
+    <img class="image_class" src="{% static "images/black.jpg" %}" alt="">
+</div>
+<div id="colorSelector">
+    <div class="colorItem colorBlack" data-img-path="{% static "images/black.jpg" %}"></div>
+    <div class="colorItem colorWhite" data-img-path="{% static "images/white.jpg" %}"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}">
+
+    <title>jQuery practice</title>
+</head>
+<body>
+<div id="imgHolder" class="img_holder">
+    <img src="{% static "pics/god_car/black.png" %}" alt="Авто">
+
+    <div class="model_summary">
+        <div class="model_name">Dala MuKPa</div>
+        <div class="model_specs" id="modelSpecs"></div>
+        <div class="model_price" id="modelPrice"></div>
+        <div class="model_price" id="modelCurPrice"></div>
+        <div class="button">Заказать</div>
+    </div>
+    <div class="spec_cur_container">
+        <button class="cur_toggle">Сменить валюту (¯\_(ツ)_/¯)</button>
+        <div class="cur_dropdown">
+            <p>Введите код валюты</p>
+            <div id="cur_message"></div>
+            <input type="text" id="target_cur" placeholder="USD" size="3">
+            <button id="cur_submit">OK</button>
+        </div>
+    </div>
+
+</div>
+
+<form id="config_form" action="#">
+    <h3>Комплектация:</h3>
+    <div class="engine_select">
+        <h5>Двигатель</h5>
+        <input type="radio" name="engine" id="engine2000" value="450000" checked>
+        <label for="engine2000">1.6</label>
+        <input type="radio" name="engine" id="engine3000" value="999000">
+        <label for="engine3000">4.4</label>
+    </div>
+    <div class="gear_select">
+        <h5>Коробка</h5>
+        <input type="radio" name="gear" id="gear18" value="100500">
+        <label for="gear18">Sequental 18 ст. (18SqМТ Shimano)</label>
+        <input type="radio" name="gear" id="gear4" value="0" checked>
+        <label for="gear4">Ручная 4 ст. (4MT)</label>
+    </div>
+    <div class="pack_select">
+        <h5>Комплектация</h5>
+        <input type="radio" name="pack" id="stranger" value="0" checked>
+        <label for="stranger">Пыльный путник</label>
+        <input type="radio" name="pack" id="baron" value="300000">
+        <label for="baron">Барская</label>
+        <input type="radio" name="pack" id="chief" value="1200000">
+        <label for="chief">Президентская (кондиционер)</label>
+    </div>
+    <h4>Цвет</h4>
+    <div class="color_select">
+        <div class="color_item colorBlack selected" data-img="{% static "pics/god_car/black.png" %}"></div>
+        <div class="color_item colorRed" data-img="{% static "pics/god_car/red.png" %}"></div>
+        <div class="color_item colorBrown" data-img="{% static "pics/god_car/brown-gray.png" %}"></div>
+        <div class="color_item colorWhite" data-img="{% static "pics/god_car/white.png" %}"></div>
+        <div class="color_item colorBlue" data-img="{% static "pics/god_car/blue.png" %}"></div>
+    </div>
+
+</form>
+
+<script type="text/javascript" src="{% static "jquery/jquery-3.3.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "scripts/jQuery.js" %}"></script>
+</body>
+</html>

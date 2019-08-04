@@ -1,0 +1,23 @@
+{% extends "project_base.html" %}
+
+{% block title %}
+    Create Topic
+{% endblock %}
+
+{% block content %}
+    <form action="{% url "topic_create_url" %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.lable }}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit">Send</button>
+    </form>
+{% endblock %}

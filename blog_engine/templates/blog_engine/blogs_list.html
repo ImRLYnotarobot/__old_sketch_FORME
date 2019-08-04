@@ -1,0 +1,62 @@
+{% extends 'project_base.html' %}
+{% load static %}
+
+{% block title %}
+    Blogs.
+{% endblock %}
+
+
+
+{% block content %}
+    {% if not blog_page.object_list %}
+        <div class="alert alert-warning" role="alert">
+            There is no blogs like this
+        </div>
+    {% else %}
+        {% for blog in blog_page.object_list %}
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.title }} <span class="text-muted">{{ blog.total_likes }}</span></h5>
+                    <p class="card-text">{{ blog.description|truncatewords:15 }}</p>
+                    <a href="{% url "blog_detail_url" blog.id %}" class="btn btn-primary">See..</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block footer_like %}
+    {% if blog_page.object_list %}
+
+        <nav id="paginator">
+            <ul class="pagination">
+                {% if not blog_page.has_next and blog_page.number == 1 %}
+                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+
+
+                {% else %}
+                    {% if blog_page.number != 1 %}
+                        <li class="page-item"><a class="page-link" href="?page={{ blog_page.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% for n in blog_page.paginator.page_range %}
+                        {% if n == blog_page.number %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                        {% elif n > blog_page.number|add:-3 and n < blog_page.number|add:3 %}
+                            <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if blog_page.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ blog_page.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
+        {% else %}
+        <a class="btn btn-light" href="{% url "blogs_list_url" %}">cancel</a>
+    {% endif %}
+{% endblock %}

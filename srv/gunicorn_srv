@@ -1,0 +1,28 @@
+#! /bin/bash
+
+NAME="sketch_proj"
+DJANGODIR=/home/mike/Documents/sketch_proj
+SOCK=unix:/home/mike/run/gunicorn.sock
+USER=mike
+GROUP=mike
+NUM_WORKERS=4
+DJANGO_SETTINGS_MODULE=sketch_proj.settings
+DJANGO_WSGI_MODULE=sketch_proj.wsgi
+
+echo "Starting $NAME as $(whoami)"
+
+cd $DJANGODIR
+source activate env37
+
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+
+
+exec /home/mike/.pyenv/versions/3.7.1/envs/env37/bin/gunicorn $DJANGO_WSGI_MODULE:application \
+--name $NAME \
+--workers $NUM_WORKERS \
+--user=$USER --group=$GROUP \
+--bind=$SOCK \
+--log-level=debug \
+--log-file=-
+

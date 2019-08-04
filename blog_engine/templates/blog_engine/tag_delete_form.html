@@ -1,0 +1,18 @@
+{% extends 'project_base.html' %}
+
+{% block title %}
+    Delete Tag {{ obj.title }}
+{% endblock %}
+
+{% block content %}
+    <form action="{{ obj.get_delete_url }}" method="post">
+        {% csrf_token %}
+        <h2>Do you want to delete tag:</h2>
+        <h4>{{ obj.title }}</h4>
+        <p>Number of related topics: {{ obj.topics.count }}</p>
+        <button type="submit" class="btn btn-primary">Yes</button>
+    </form>
+    <a href="{{ obj.get_absolute_url }}">No</a>
+
+
+{% endblock %}

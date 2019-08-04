@@ -1,0 +1,44 @@
+{% extends 'project_base.html' %}
+
+{% block title %}
+    Blog: {{ blog.title }}
+{% endblock %}
+
+{% block content %}
+    <h3>
+        {{ blog.title }}
+    </h3>
+    <h5>
+        Author: {{ blog.author }}
+    </h5>
+    <h6>
+        {% for topic in blog.topic_set.all %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ topic.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ topic.created }}</h6>
+                    <p class="card-text">{{ topic.body|truncatewords:10 }}</p>
+                    <a href="{% url "topic_detail_url" topic.id %}" class="btn btn-primary">Read</a>
+
+                    {% if topic.tags.all %}
+                        <span>Tags:</span>
+                        {% for tag in topic.tags.all %}
+                            <a href="{{ tag.get_absolute_url }}" class="card-link">{{ tag.title }}</a>
+                        {% endfor %}
+                    {% endif %}
+
+                    <p class="text-muted pt-1">Likes: {{ topic.likes.count }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <h4>Blog subscribers</h4>
+        <ul class="list-inline">
+            {% for user in blog.subscribers.all %}
+                <li class="list-inline-item">{{ user }}</li>
+            {% endfor %}
+        </ul>
+    </h6>
+    <p>
+        <a href={% url 'blogs_list_url' %}>back</a>
+    </p>
+{% endblock %}

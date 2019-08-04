@@ -1,0 +1,42 @@
+.admin-panel {
+    border: 1px solid #999;
+    border-radius: 4px;
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
+    opacity: 0.4;
+    padding: 15px
+}
+
+.admin-panel:hover {
+    opacity: 1;
+}
+
+.admin-panel a {
+    display: block;
+    margin: 5px 0;
+}
+
+.pinkColor {
+    color: pink;
+}
+
+.my_div_block {
+    background-color: #939521;
+    width: 250px;
+    height: 50px;
+    margin: 5px
+}
+
+.pinkbgColor {
+    background-color: hotpink;
+}
+
+#input_name {
+    margin: 10px;
+}
+
+.focus {
+    border: 5px solid #ff0500 !important;
+    box-shadow: 0px 0px 25px #fa4e4e;
+}

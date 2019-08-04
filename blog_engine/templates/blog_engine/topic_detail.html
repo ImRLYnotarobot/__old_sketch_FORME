@@ -1,0 +1,28 @@
+{% extends 'project_base.html' %}
+
+{% block title %}
+    {{ topic.title }}
+{% endblock %}
+
+{% block content %}
+    <h3>
+        {{ topic.title }}
+    </h3>
+    <h6 class="mb-2 text-muted">{{ topic.created }}</h6>
+
+    {{ topic.body }}
+    <p class="mt-3">
+        Blog: <a href={% url "blog_detail_url" topic.blog.id %}>{{ topic.blog.title }}</a>
+    </p>
+    {% if topic.tags.all %}
+        <p>Tag(s):
+            {% for tag in topic.tags.all %}
+
+                <a href="{% url "tag_detail_url" tag.slug %}"> {{ tag.title }} </a>
+            {% endfor %}
+        </p>
+    {% else %}
+        No related tags
+    {% endif %}
+
+{% endblock %}

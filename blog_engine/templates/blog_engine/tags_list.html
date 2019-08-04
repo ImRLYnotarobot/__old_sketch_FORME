@@ -1,0 +1,58 @@
+{% extends "project_base.html" %}
+
+{% block title %}
+    Tags
+{% endblock %}
+
+{% block content %}
+    {% if not tag_page.object_list %}
+        <div class="alert alert-warning" role="alert">
+            There is no any tags yet
+        </div>
+    {% endif %}
+    {% for tag in tag_page.object_list %}
+        <div class="card mt-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ tag.title }} <span class="text-muted">some shit</span></h5>
+                <p class="card-text">other shit</p>
+                <a href="{{ tag.get_absolute_url }}" class="btn btn-primary">See..</a>
+            </div>
+            <div class="card-footer">
+                <a href="{{ tag.get_update_url }}" class="card-text">Edit tag</a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block footer_like %}
+    <nav id="paginator">
+        <ul class="pagination">
+            {% if not tag_page.has_next and tag_page.number == 1 %}
+                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+
+            {% else %}
+                {% if tag_page.number != 1 %}
+                    <li class="page-item"><a class="page-link" href="?page={{ blog_page.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                {% for n in tag_page.paginator.page_range %}
+                    {% if n == tag_page.number %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                    {% elif n > tag_page.number|add:-3 and n < tag_page.number|add:3 %}
+                        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+
+                    {% endif %}
+                {% endfor %}
+
+                {% if tag_page.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ blog_page.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}
